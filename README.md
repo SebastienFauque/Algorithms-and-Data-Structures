@@ -1,2 +1,2 @@
 # Microprojects
-Practice projects
+Practice projects to learn how to use Github
