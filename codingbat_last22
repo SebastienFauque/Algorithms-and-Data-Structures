@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Oct 26 12:51:06 2020
+
+@author: sebastien
+@title: codingbat_last22.py
+"""
+
+#redo of the codingbat exercise using more pythonic code
+def last2(str):
+    """
+    input: a string where some letter combos are repeating.
+    output: a number that counts the number of times the last two letters are repeated.
+    
+    Purpose: to count the number o times that the last two letters from the string
+    are repeated in the string. Does not count the last two letters.
+    """
+    
+    #  The base case where string length is less than two.
+    if len(str) < 2:
+        return 0
+    
+    #  Select the last two letters from string
+    last2 = str[-2:]
+    print(last2)
+    
+    #  initialize the count of the occurrances of target in the string
+    ctr = 0
+    
+    #  loop through str from first letter to last letter -2 positions
+    for i in range(len(str)-2):
+        #  select the target letter and the following letter
+        sub = str[i:i+2]
+        #  conditional to check for last2 egality
+        if sub == last2:
+            ctr += 1
+
+    
+    return ctr
+
+str = 'axxxaaxx'
+print(last2(str))
+        
+    
