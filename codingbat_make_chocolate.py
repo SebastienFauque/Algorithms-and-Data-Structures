@@ -19,11 +19,24 @@ make_chocolate(4, 1, 7) → 2
 
 """
 def make_chocolate(small, big, goal):
-    # if goal is larger than big + small  
-    if goal > big*5 + small:
-          return -1
-    # 
-          
+  if goal > small*1 + big*5:
+    return -1
+  elif goal - (big * 5) > small:
+    return -1
+  elif (big * 5) > goal:
+    bigCtr = 0
+    while (bigCtr + 1) * 5 <= goal:
+      bigCtr += 1
+    if bigCtr == goal:
+      return 0
+    elif goal - (bigCtr * 5) > small:
+      return -1
+    else:
+      smallCtr = (goal - (bigCtr * 5))
+      return smallCtr
+  else:
+    ctr = (goal - (big * 5))
+    return ctr
           
     
 small = 1000
