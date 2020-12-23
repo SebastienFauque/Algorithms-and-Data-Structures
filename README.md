@@ -1,2 +1,2 @@
 # Microprojects
-Programming challenges from websites such as codingbat and codewars.
+Programming challenges from codingbat and codewars.
