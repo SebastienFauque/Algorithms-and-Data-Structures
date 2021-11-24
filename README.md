@@ -1,4 +1,1 @@
-# Microprojects
-Programming challenges from Code wars and Codingbat
-
-Code wars profile https://www.codewars.com/users/Sailfish
+# Some algorithm and data structure problems that I've played around with
