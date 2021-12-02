@@ -10,8 +10,8 @@
 function jumps(flagHeight: number, bigJump: number) {
   if (!flagHeight || !bigJump) return undefined;
 
-  let current = 0;
-  let jumps = 0;
+  let current: number = 0;
+  let jumps: number = 0;
 
   while (current < flagHeight) {
     if ((flagHeight - current) >= bigJump) {
