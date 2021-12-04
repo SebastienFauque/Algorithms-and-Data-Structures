@@ -26,8 +26,6 @@ const fizzBuzz = (n?: number) => {
   return;
 }
 
-
-
 // console.log(fizzBuzz()) //-1
 // console.log(fizzBuzz(-1)) //-1
 // console.log(fizzBuzz(0)) //0
