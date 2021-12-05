@@ -70,6 +70,8 @@ In this example, there are 7 measurements that are larger than the previous meas
 
 
 const sonarSweep = (depths: number[]) => {
+  if (!depths || !depths.length) return undefined;
+
   let previous: number = depths[0];
   let count: number = 0;
 
@@ -99,6 +101,28 @@ const parse = (testSuite: string[]) => {
   return inputNums;
 }
 
-console.log(sonarSweep(parse(textByLine))); //1195 Solved!
+// console.log(sonarSweep(parse(textByLine))); //1195 Solved!
+
+const sonarSweepSum = (depths: number[]) => {
+  if (!depths || !depths.length) return undefined;
+
+  function sum(nums: number[]) {
+    return nums[0] + nums[1] + nums[2];
+  }
+
+  let previous: number = sum(depths.slice(0, 3));
+  let current: number = 0;
+  let countDeeper: number = 0;
+
+  for (let i = 1; i < depths.length; i++) {
+    current = sum(depths.slice(i, i+3));
+
+    if (current > previous) countDeeper++;
+    previous = current;
+  }
+
+  return countDeeper;
+}
 
 
+console.log(sonarSweepSum(parse(textByLine)));
