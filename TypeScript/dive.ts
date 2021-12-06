@@ -52,9 +52,10 @@ What do you get if you multiply your final horizontal position by your final dep
 //   vertical: 0
 // }
 
-const position: {horizontal: number, vertical: number} = {
+const position: {horizontal: number, vertical: number, aim: number} = {
   horizontal: 0,
-  vertical: 0
+  vertical: 0,
+  aim: 0
 }
 
 function dive(position: {horizontal: number, vertical: number}, directions: string[]): number {
@@ -86,7 +87,7 @@ function dive(position: {horizontal: number, vertical: number}, directions: stri
 const exampleData: string[] = ['forward 5', 'down 5', 'forward 8', 'up 3', 'down 8', 'forward 2'];
 
 // console.log(dive(position, exampleData));
-console.log(dive(position, diveText)); //1427868
+// console.log(dive(position, diveText)); //1427868
 
 /**
  * --- Part Two ---
@@ -131,3 +132,32 @@ What do you get if you multiply your final horizontal
 position by your final depth?
  */
 
+function diveAndAim(position: {horizontal: number, vertical: number, aim: number}, directions: string[]): number {
+  if (!position || !directions) return undefined;
+
+  for (let i = 0; i < directions.length; i++) {
+    const split: string[] = directions[i].split(' ');
+    const direction: string = split[0];
+    const distance: number = Number(split[1]);
+
+    switch (direction) {
+      case "forward":
+        position.horizontal += Number(distance);
+        position.vertical += Number(distance) * position.aim
+      break;
+      case "down":
+        position.aim += Number(distance);
+        break;
+      case "up":
+        position.aim -= Number(distance);
+      default:
+      console.log("direction match not found");
+      break;
+    }
+  }
+
+  return position.horizontal * position.vertical;
+}
+
+// console.log(diveAndAim(position, exampleData))
+console.log(diveAndAim(position, diveText)); //1568138742
