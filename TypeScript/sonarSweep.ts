@@ -1,5 +1,5 @@
 const fs = require('fs');
-const text: string = fs.readFileSync("TypeScript/sonarSweepText.txt", 'utf-8');
+const text: string = fs.readFileSync("TypeScript/rawData/sonarSweepText.txt", 'utf-8');
 const textByLine: string[] = text.split('\n');
 
 const parse = (testSuite: string[]) => {

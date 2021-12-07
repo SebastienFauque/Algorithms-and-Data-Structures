@@ -1,5 +1,5 @@
 const fs = require('fs');
-const textDive: string = fs.readFileSync("TypeScript/diveTestData.txt", "utf-8");
+const textDive: string = fs.readFileSync("TypeScript/rawData/diveTestData.txt", "utf-8");
 const diveText: string[] = textDive.split('\n');
 
 
