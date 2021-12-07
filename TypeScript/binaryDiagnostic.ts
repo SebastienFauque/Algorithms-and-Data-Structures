@@ -1,3 +1,6 @@
+const fs = require('fs');
+const text: string = fs.readFileSync('TypeScript/rawData/binaryDiagnosticText.txt', 'utf-8');
+const textByLine: string[] = text.split('\n');
 /**
  * --- Day 3: Binary Diagnostic ---
 The submarine has been making some odd creaking noises, so you ask it to produce a diagnostic report just in case.
@@ -38,8 +41,8 @@ Use the binary numbers in your diagnostic report to calculate the gamma rate and
 
 function binaryDiagnostic(binaryData: string[]): number {
 
-  const bit0: number[] = [0, 0, 0, 0, 0];
-  const bit1: number[] = [0, 0, 0, 0, 0];
+  const bit0: number[] = new Array(binaryData[0].length).fill(0);
+  const bit1: number[] = new Array(binaryData[0].length).fill(0);
 
   for (let i: number = 0; i < binaryData.length; i++) {
     for (let j: number = 0; j < binaryData[i].length; j++) {
@@ -48,13 +51,10 @@ function binaryDiagnostic(binaryData: string[]): number {
     }
   }
 
-  console.log('bit0', bit0);
-  console.log('bit1', bit1);
   let gamma = '';
   let epsilon = '';
 
   for (let i: number = 0; i < bit0.length; i++) {
-
     if (bit0[i] >= bit1[i]) gamma = gamma + '0';
     else gamma = gamma + '1';
 
@@ -62,7 +62,7 @@ function binaryDiagnostic(binaryData: string[]): number {
     else epsilon = epsilon + '1';
   }
 
-  // convert to decimal
+  // convert to decimal with a helper function
   function binToDec(str: string): number {
     return str.split('').reverse().reduce((
         accumulator: number,
@@ -89,4 +89,5 @@ const exampleData = ['00100',
   '01010'
 ];
 
-console.log(binaryDiagnostic(exampleData));
+console.log(binaryDiagnostic(exampleData)); //198
+console.log(binaryDiagnostic(textByLine)); //1092896 // Solved!
