@@ -60,7 +60,7 @@ const text: string = fs.readFileSync('TypeScript/rawData/giantSquidData.txt', 'u
 const textByLine: string[] = text.split('\n\n');
 
 // console.log(textByLine.slice(0, 1));
-const callNumbers: string[] = textByLine.slice(0, 1)[0].split(',').map((num) => Number(num));
+const callNumbers: number[] = textByLine.slice(0, 1)[0].split(',').map((num) => Number(num));
 // console.log(callNumbers);
 
 // try splitting on empty line
@@ -70,7 +70,7 @@ const wholeBoards: string[] = textByLine.slice(1);
 // split each board into rows
 // split each row into an array of string numbers
 // convert each string number to a number
-rowBoards = wholeBoards.map((data) => {
+const rowBoards = wholeBoards.map((data) => {
   return data.split('\n').map((row) => {
     return row.split(' ').filter((val) => {
       return val !== ''}).map((val) => {
@@ -78,7 +78,39 @@ rowBoards = wholeBoards.map((data) => {
     })
   })
 })
+// console.log('hi');
+// console.log(rowBoards);
+
+
+function giantSquid(board: number[][][], callNumbers: number[]) {
+  let gameOver: boolean = false;
+  let calledNumbers: number[] = [];
+
+  let i: number = 0;
+  while (!gameOver) {
+    // get the called number and push it to the store calledNumbers
+    const currentNum = callNumbers[0];
+    calledNumbers.push(currentNum);
+
+    // Loop through each row of each board, if the number exists, turn it into a string
+    for (let i: number = 0; i < board.length; i++) {
+      for (let j: number = 0; j < board[i].length; j++) {
+        for (let k: number = 0; k < board[i][j].length; k++) {
+          if (currentNum === board[i][j][k]) {
+            board[i][j][k].toString();
+          }
+        }
+      }
+      // check each board to see if it is correct
+    }
 
 
 
-console.log(rowBoards[0]);
+
+  }
+
+}
+
+
+// console.log(rowBoards[0]);
+// console.log(giantSquid(rowBoards, callNumbers))
