@@ -54,7 +54,7 @@ The score of the winning board can now be calculated. Start by finding the sum o
 
 To guarantee victory against the giant squid, figure out which board will win first. What will your final score be if you choose that board?
  */
-
+console.log('Hi');
 const fs = require('fs');
 const text: string = fs.readFileSync('TypeScript/rawData/giantSquidData.txt', 'utf-8');
 const textByLine: string[] = text.split('\n\n');
@@ -81,36 +81,97 @@ const rowBoards = wholeBoards.map((data) => {
 // console.log('hi');
 // console.log(rowBoards);
 
+console.log('Hi');
+
 
 function giantSquid(board: number[][][], callNumbers: number[]) {
+  console.log('Hi');
   let gameOver: boolean = false;
-  let calledNumbers: number[] = [];
+  let store: {
+    board: number;
+    row: number;
+    column: number;
+    notCalledNumbers: number[];
+    lastNumber: number;
+  } = {
+    board: 0,
+    row: 0,
+    column: 0,
+    notCalledNumbers: [],
+    lastNumber: 0
+  }
 
-  let i: number = 0;
-  while (!gameOver) {
+  let ctr: number = 0;
+  while (gameOver === false) {
     // get the called number and push it to the store calledNumbers
-    const currentNum = callNumbers[0];
-    calledNumbers.push(currentNum);
-
-    // Loop through each row of each board, if the number exists, turn it into a string
+    const currentNum = callNumbers[ctr];
+    console.log(currentNum);
+    Loop through each column and row of each board, if the number exists, turn it into a string
     for (let i: number = 0; i < board.length; i++) {
       for (let j: number = 0; j < board[i].length; j++) {
+        // Initialize a counter to count the number of number-strings in each column;
+        const colNumStr: number[] = [0,0,0,0,0];
+        // Initialize a counter to count the number of number-strings in each row;
+        let rowNumStr = 0;
         for (let k: number = 0; k < board[i][j].length; k++) {
           if (currentNum === board[i][j][k]) {
             board[i][j][k].toString();
+            rowNumStr++;
+          } else if (typeof board[i][j][k] === 'string') {
+            rowNumStr++;
+          }
+
+          // Check the horizontal and the vertical for winning conditions;
+          // Check each horizontal to see if the game is done;
+          if (rowNumStr === 5) {
+            console.log(`The winning board is board is number: ${i}. \n Here is the board: ${board[i]}. \n The winning row is: ${j} which is ${board[i][j]}. \n The winning number is ${board[i][j][k]}.` );
+            store.board = i;
+            store.row = j;
+            store.column = k;
+            store.lastNumber = board[i][j][k];
+            gameOver = true;
+            // Break out of while loop and pass on some info;
+            break;
+          }
+          // Check each verticalboard to see if it is correct;
+          for (let n: number = 0; n < colNumStr.length; n++) {
+            if (colNumStr[n] === 5) {
+              gameOver = true;
+              console.log(`The winning board is board is number: ${i}. \n Here is the board: ${board[i]}. \n The winning column is: ${k} which is ${board[i]}. \n The winning number is ${board[i][j][k]}.` );
+              store.board = i;
+              store.row = j;
+              store.column = k;
+              store.lastNumber = board[i][j][k];
+              gameOver = true;
+            }
+            break;
           }
         }
       }
-      // check each board to see if it is correct
     }
-
-
-
-
+    ctr++;
+    if (ctr >= 10) {
+      gameOver = true;
+    }
   }
 
+  console.log('Hi');
+  for (let i: number = 0; i < board[store.board].length; i++) { // Chooses the rows;
+    for (let j: number = 0; j < board[store.board][i].length; j++) { // Chooses the row x column;
+      if (typeof board[store.board][i][j] === 'number') {
+        store.notCalledNumbers.push(board[store.board][i][j]);
+      }
+    }
+  }
+
+  const sum = store.notCalledNumbers.reduce((acc, num) => {
+    return acc = acc + num;
+  }, 0);
+
+  console.log(`The sum is ${sum} and the last bingo number called is ${store.lastNumber}, the total result is ${sum * store.lastNumber}.`);
+  return sum * store.lastNumber;
 }
 
 
 // console.log(rowBoards[0]);
-// console.log(giantSquid(rowBoards, callNumbers))
+console.log(giantSquid(rowBoards, callNumbers))
