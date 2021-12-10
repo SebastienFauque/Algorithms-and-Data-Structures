@@ -56,7 +56,11 @@ To guarantee victory against the giant squid, figure out which board will win fi
  */
 console.log('Hi');
 const fs = require('fs');
-const text: string = fs.readFileSync('TypeScript/rawData/giantSquidData.txt', 'utf-8');
+// full data
+// const text: string = fs.readFileSync('TypeScript/rawData/giantSquidData.txt', 'utf-8');
+
+// testing data
+const text: string = fs.readFileSync('TypeScript/rawData/giantSquidTestingData.txt', 'utf-8');
 const textByLine: string[] = text.split('\n\n');
 
 // console.log(textByLine.slice(0, 1));
@@ -65,12 +69,20 @@ const callNumbers: number[] = textByLine.slice(0, 1)[0].split(',').map((num) => 
 
 // try splitting on empty line
 const wholeBoards: string[] = textByLine.slice(1);
-// console.log(boards[0]);
+console.log(wholeBoards[0]);
+
+const tile: {
+  boardNumber: number;
+  isMarked: boolean;
+} = {
+
+}
 
 // split each board into rows
 // split each row into an array of string numbers
 // convert each string number to a number
-const rowBoards = wholeBoards.map((data) => {
+const rowBoards = wholeBoards.map((data, index) => {
+  console.log(data);
   return data.split('\n').map((row) => {
     return row.split(' ').filter((val) => {
       return val !== ''}).map((val) => {
@@ -79,12 +91,12 @@ const rowBoards = wholeBoards.map((data) => {
   })
 })
 // console.log('hi');
-// console.log(rowBoards);
+console.log(rowBoards);
 
 console.log('Hi');
 
 
-function giantSquid(board: number[][][], callNumbers: number[]) {
+function determineBingoWinningBoard(board: number[][][], callNumbers: number[]) {
   console.log('Hi');
   let gameOver: boolean = false;
   let store: {
@@ -101,34 +113,38 @@ function giantSquid(board: number[][][], callNumbers: number[]) {
     lastNumber: 0
   }
 
+
+
   let ctr: number = 0;
   while (gameOver === false) {
     // get the called number and push it to the store calledNumbers
     const currentNum = callNumbers[ctr];
     console.log(currentNum);
-    Loop through each column and row of each board, if the number exists, turn it into a string
-    for (let i: number = 0; i < board.length; i++) {
-      for (let j: number = 0; j < board[i].length; j++) {
+    // Loop through each column and row of each board, if the number exists, turn it into a string
+    for (let boardIndex: number = 0; boardIndex < board.length; boardIndex++) { // board index
+      for (let rowIndex: number = 0; rowIndex < board[boardIndex].length; rowIndex++) { //
         // Initialize a counter to count the number of number-strings in each column;
         const colNumStr: number[] = [0,0,0,0,0];
         // Initialize a counter to count the number of number-strings in each row;
         let rowNumStr = 0;
-        for (let k: number = 0; k < board[i][j].length; k++) {
-          if (currentNum === board[i][j][k]) {
-            board[i][j][k].toString();
+        for (let columnIndex: number = 0; columnIndex < board[boardIndex][rowIndex].length; columnIndex++) {
+          // console.log(board[boardIndex][rowIndex][k]);
+
+          if (currentNum === board[boardIndex][rowIndex][columnIndex]) {
+            board[boardindex][rowIndex][columnIndex] = board[boardIndex][rowIndex][columnIndex].toString();
             rowNumStr++;
-          } else if (typeof board[i][j][k] === 'string') {
+          } else if (typeof board[boardIndex][rowIndex][columnIndex] === 'string') {
             rowNumStr++;
           }
 
           // Check the horizontal and the vertical for winning conditions;
           // Check each horizontal to see if the game is done;
           if (rowNumStr === 5) {
-            console.log(`The winning board is board is number: ${i}. \n Here is the board: ${board[i]}. \n The winning row is: ${j} which is ${board[i][j]}. \n The winning number is ${board[i][j][k]}.` );
-            store.board = i;
-            store.row = j;
-            store.column = k;
-            store.lastNumber = board[i][j][k];
+            console.log(`The winning board is board is number: ${boardIndex}. \n Here is the board: ${board[boardIndex]}. \n The winning row is: ${rowIndex} which is ${board[boardIndex][rowIndex]}. \n The winning number is ${board[boardIndex][rowIndex][columnIndex]}.` );
+            store.board = boardIndex;
+            store.row = rowIndex;
+            store.column = columnIndex;
+            store.lastNumber = board[boardIndex][rowIndex][columnIndex];
             gameOver = true;
             // Break out of while loop and pass on some info;
             break;
@@ -137,11 +153,11 @@ function giantSquid(board: number[][][], callNumbers: number[]) {
           for (let n: number = 0; n < colNumStr.length; n++) {
             if (colNumStr[n] === 5) {
               gameOver = true;
-              console.log(`The winning board is board is number: ${i}. \n Here is the board: ${board[i]}. \n The winning column is: ${k} which is ${board[i]}. \n The winning number is ${board[i][j][k]}.` );
-              store.board = i;
-              store.row = j;
-              store.column = k;
-              store.lastNumber = board[i][j][k];
+              console.log(`The winning board is board is number: ${boardIndex}. \n Here is the board: ${board[boardIndex]}. \n The winning column is: ${columnIndex} which is ${board[boardIndex]}. \n The winning number is ${board[boardIndex][rowIndex][columnIndex]}.` );
+              store.board = boardIndex;
+              store.row = rowIndex;
+              store.column = columnIndex;
+              store.lastNumber = board[boardIndex][rowIndex][columnIndex];
               gameOver = true;
             }
             break;
@@ -172,6 +188,18 @@ function giantSquid(board: number[][][], callNumbers: number[]) {
   return sum * store.lastNumber;
 }
 
+function isWinningBoard(board: [][]) {
+  checkRow
+  checkColumn
+}
+
+
+
+function checkRow(row: number[] | object[]) {
+
+}
+
 
 // console.log(rowBoards[0]);
+const boards =
 console.log(giantSquid(rowBoards, callNumbers))
