@@ -42,6 +42,9 @@
 // Submissions
 // 655,839
 
+
+// Solved in O(n), specifically O(3n) because there are 3 loops:
+// one on line 51, 58, and 62. Space complexity is O(1).
 const validMountainArray = function(arr: number[]): boolean {
   if (!arr || arr.length <= 2) return false;
 
