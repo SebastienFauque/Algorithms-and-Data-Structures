@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
 var maxProfit = function(prices: number[]): number {
   let minimumPrice: number = prices[0]; //1
   let maximumProfit: number = 0; //5
