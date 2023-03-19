@@ -6,7 +6,7 @@ This repo is a demonstration of various algorithms I've solved using various too
 - Java
 - TypeScript
 - Python
-- Javascript
+- JavaScript
 
 ## Tools
 - LeetCode
