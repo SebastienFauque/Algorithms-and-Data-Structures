@@ -8,7 +8,11 @@ This repo is a demonstration of various algorithms I've solved using various too
 - Python
 - JavaScript
 
-## Tools
+## Challenge sites
 - LeetCode
 - CodeWars
 - CodingBat
+
+## IDE
+- VSCode
+- IntelliJ IDEA
