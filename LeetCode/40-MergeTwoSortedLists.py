@@ -53,8 +53,11 @@ def update_lists(head, merged, l1, l2):
     return (head, merged, l1, l2)
 
 
+# Test case
 l1 = [1, 2, 4]
 l2 = [1, 3, 4]
+
+# Test Setup
 h1 = None
 h2 = None
 ll1 = None
