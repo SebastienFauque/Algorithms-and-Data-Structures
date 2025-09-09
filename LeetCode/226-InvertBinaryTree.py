@@ -7,24 +7,13 @@
 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        return self.recurse(root)
-        
-    
-    def recurse(self, subroot):
-        if hasattr(subroot, 'left') and hasattr(subroot, 'right'):
-            temp = subroot.left
-            subroot.left = subroot.right
-            subroot.right = temp
-            self.recurse(subroot.left)
-            self.recurse(subroot.right)
-        elif hasattr(subroot, 'left'):
-            subroot.right = subroot.left
-            subroot.left = None
-            self.recurse(subroot.right)
-        elif hasattr(subroot, 'right'):
-            subroot.left = subroot.right
-            subroot.right = None
-            self.recurse(subroot.left)
 
-        return subroot
+        if not root: return None
+
+        root.left, root.right = root.right, root.left
+
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root
+        
         
